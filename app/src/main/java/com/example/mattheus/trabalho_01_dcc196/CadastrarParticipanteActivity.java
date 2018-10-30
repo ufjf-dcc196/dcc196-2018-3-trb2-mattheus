@@ -2,13 +2,13 @@ package com.example.mattheus.trabalho_01_dcc196;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class CadastrarParticipante extends AppCompatActivity {
+public class CadastrarParticipanteActivity extends AppCompatActivity {
     private EditText txt_nome_participante, txt_email_participante, txt_cpf_participante;
     private Button btn_salvar_participante;
 
@@ -38,7 +38,4 @@ public class CadastrarParticipante extends AppCompatActivity {
         });
 
     }
-
-
-
 }

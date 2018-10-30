@@ -5,17 +5,28 @@ import java.util.List;
 
 public class Singleton {
 
-    private static List<Evento> eventos;
-    private static List<Participante> participantes;
+    private static Singleton instance = new Singleton();
 
-    public static List<Evento> getInstanceEvento(){
+    private List<Evento> eventos;
+    private List<Participante> participantes;
+
+
+    private Singleton() {
+
+    }
+    public static Singleton getInstance(){
+        return instance;
+    }
+
+
+    public List<Evento> getInstanceEvento(){
         if (eventos == null){
             eventos = new ArrayList<>();
         }
         return eventos;
     }
 
-    public static List<Participante> getInstanceParticipante(){
+    public List<Participante> getInstanceParticipante(){
         if (participantes == null){
             participantes = new ArrayList<>();
         }

@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         btn_cadastrar_participante.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CadastrarParticipante.class);
+                Intent intent = new Intent(MainActivity.this, CadastrarParticipanteActivity.class);
                 startActivityForResult(intent, MainActivity.REQUEST_CADASTRO_PARTICIPANTE);
             }
         });
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         btn_cadastrar_evento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CadastrarEvento.class);
+                Intent intent = new Intent(MainActivity.this, CadastrarEventoActivity.class);
                 startActivityForResult(intent, MainActivity.REQUEST_CADASTRO_EVENTO);
             }
         });
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         btn_listar_participante.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ListarParticipantes.class);
+                Intent intent = new Intent(MainActivity.this, ListarParticipantesActivity.class);
                 startActivityForResult(intent, MainActivity.REQUEST_LISTAR_EVENTO);
 
             }
