@@ -28,10 +28,10 @@ public class CadastrarParticipanteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent resultado = new Intent();
-                resultado.putExtra("Nome",txt_nome_participante.getText().toString());
-                resultado.putExtra("Email",txt_email_participante.getText().toString());
-                resultado.putExtra("CPF",txt_cpf_participante.getText().toString());
                 Participante p = new Participante(txt_nome_participante.getText().toString(),txt_email_participante.getText().toString(),txt_cpf_participante.getText().toString());
+
+                Singleton.getInstance().addParticipante(p);
+
                 setResult(Activity.RESULT_OK, resultado);
                 finish();
             }

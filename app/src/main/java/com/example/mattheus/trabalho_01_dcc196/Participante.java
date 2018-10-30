@@ -49,7 +49,7 @@ public class Participante {
         eventos.add(evento);
     }
 
-    public void rmvEvento(Integer id){
-        eventos.remove(id);
+    public void removeEvento(Evento e){
+        eventos.remove(e);
     }
 }

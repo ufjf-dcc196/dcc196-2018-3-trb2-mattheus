@@ -9,8 +9,8 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
     private Button btn_cadastrar_evento, btn_listar_participante, btn_cadastrar_participante;
     public static final int REQUEST_CADASTRO_PARTICIPANTE = 1;
-    public static final int REQUEST_CADASTRO_EVENTO = 1;
-    public static final int REQUEST_LISTAR_EVENTO = 1;
+    public static final int REQUEST_CADASTRO_EVENTO = 2;
+    public static final int REQUEST_LISTAR_EVENTO = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +46,4 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        super.onActivityResult(requestCode, resultCode, data);
-
-    }
 }

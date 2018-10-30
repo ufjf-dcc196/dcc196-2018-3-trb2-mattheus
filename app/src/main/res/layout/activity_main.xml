@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rcl_View_Participantes"
+        android:id="@+id/rcl_View_Eventos"
         android:layout_width="368dp"
         android:layout_height="231dp"
         android:layout_marginStart="8dp"
@@ -54,7 +54,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rcl_View_Participantes"
+        app:layout_constraintTop_toBottomOf="@+id/rcl_View_Eventos"
         app:layout_constraintVertical_bias="0.093" />
 
     <Button
