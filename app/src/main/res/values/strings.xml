@@ -2,6 +2,10 @@
     <string name="app_name">Trabalho-01-DCC196</string>
     <string name="Cadastrar_Participantes">Cadastrar Participantes</string>
     <string name="Cadastrar_Eventos">Cadastrar Eventos</string>
-    <string name="View_Eventos">Ver Eventos</string>
     <string name="title_activity_cadastrar_evento">cadastrar_evento</string>
+    <string name="lbl_nome_participante">Nome Participante:</string>
+    <string name="lbl_email_participante">E-mail Participante:</string>
+    <string name="lbl_CPF_participante">CPF:</string>
+    <string name="btn_salvar_participante">Salvar Participante</string>
+    <string name="View_Participantes">Ver Participantes:</string>
 </resources>
