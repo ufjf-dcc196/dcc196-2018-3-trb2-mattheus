@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Trabalho-01-DCC196</string>
+    <string name="Cadastrar_Participantes">Cadastrar Participantes</string>
+    <string name="Cadastrar_Eventos">Cadastrar Eventos</string>
+    <string name="View_Eventos">Ver Eventos</string>
+    <string name="title_activity_cadastrar_evento">cadastrar_evento</string>
 </resources>
