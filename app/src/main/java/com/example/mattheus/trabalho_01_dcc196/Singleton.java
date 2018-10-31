@@ -43,10 +43,14 @@ public class Singleton {
     public void removeEvento(Evento e) {
         this.eventos.remove(e);
     }
-    public void removeEvento(Integer i) {
-        this.eventos.remove(i);
+    public void updateEvento(Evento e){
+        Integer id = this.eventos.indexOf(e);
+        this.eventos.get(id).setTitulo(e.getTitulo());
+        this.eventos.get(id).setData(e.getData());
+        this.eventos.get(id).setHora(e.getHora());
+        this.eventos.get(id).setFacilitador(e.getFacilitador());
+        this.eventos.get(id).setDescricao(e.getDescricao());
     }
-
     public int getIndiceEvento(Evento e) {
         for (int i = 0; i < eventos.size(); i++) {
             if (eventos.get(i).equals(e)) {

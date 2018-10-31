@@ -12,6 +12,9 @@ public class Participante {
         this.cpf = cpf;
         eventos = new ArrayList();
     }
+    public Participante(){
+
+    }
 
     public String getNome() {
         return nome;

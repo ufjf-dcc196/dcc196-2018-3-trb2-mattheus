@@ -1,5 +1,6 @@
 package com.example.mattheus.trabalho_01_dcc196;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,8 +12,9 @@ public class ListarDetalhesEventosActivity extends AppCompatActivity {
     private TextView txt_titulo, txt_dia, txt_hora, txt_facilitador, txt_descricao;
     private Button btn_editar_evento;
     private int id_evento;
-    private static final String ID_EVENTO = "Id do Evento";
     private static final int REQUEST_EDITAR_EVENTO = 1;
+    public static final String ID_EVENTO = "Id do Evento";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

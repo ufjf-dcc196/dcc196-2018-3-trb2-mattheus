@@ -16,6 +16,9 @@ public class Evento {
         participantes = new ArrayList();
     }
 
+    public Evento(){
+
+    }
     public String getTitulo() {
         return titulo;
     }

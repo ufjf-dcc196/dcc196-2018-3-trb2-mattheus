@@ -1,5 +1,6 @@
 package com.example.mattheus.trabalho_01_dcc196;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -77,9 +78,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
-
     }
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == MainActivity.REQUEST_CADASTRO_EVENTO && resultCode== Activity.RESULT_OK && data != null){
+            adapter.notifyDataSetChanged();
+        }
+
+    }
 }
