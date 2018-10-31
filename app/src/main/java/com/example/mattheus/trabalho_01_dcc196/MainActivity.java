@@ -3,14 +3,19 @@ package com.example.mattheus.trabalho_01_dcc196;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
+    private ListarEventosAdapter adapter;
+
     private Button btn_cadastrar_evento, btn_listar_participante, btn_cadastrar_participante;
     public static final int REQUEST_CADASTRO_PARTICIPANTE = 1;
     public static final int REQUEST_CADASTRO_EVENTO = 2;
     public static final int REQUEST_LISTAR_EVENTO = 3;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +25,13 @@ public class MainActivity extends AppCompatActivity {
         btn_cadastrar_evento = findViewById(R.id.btn_Cadastrar_Evento);
         btn_cadastrar_participante = findViewById(R.id.btn_Cadastrar_Participante);
         btn_listar_participante = findViewById(R.id.btn_View_Participantes);
+
+        recyclerView = findViewById(R.id.rcl_View_Eventos);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new ListarEventosAdapter(Singleton.getInstance().getEventos());
+        recyclerView.setAdapter(adapter);
+
+
 
         btn_cadastrar_participante.setOnClickListener(new View.OnClickListener() {
             @Override
