@@ -11,7 +11,7 @@ public class ListarDetalhesParticipantesActivity extends AppCompatActivity {
     private TextView txt_nome, txt_email, txt_cpf;
     private Button btn_editar_participante;
     private int id_participante;
-    private static final String ID_PARTICIPANTE = "Id do Participante";
+    public static final String ID_PARTICIPANTE = "Id do Participante";
     private static final int REQUEST_EDITAR_PARTICIPANTE = 1;
 
     @Override

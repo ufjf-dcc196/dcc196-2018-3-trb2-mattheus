@@ -51,6 +51,14 @@ public class Singleton {
         this.eventos.get(id).setFacilitador(e.getFacilitador());
         this.eventos.get(id).setDescricao(e.getDescricao());
     }
+
+    public void updateParticipante(Participante p){
+        Integer id = this.participantes.indexOf(p);
+        this.participantes.get(id).setNome(p.getNome());
+        this.participantes.get(id).setEmail(p.getEmail());
+        this.participantes.get(id).setCPF(p.getCPF());
+    }
+
     public int getIndiceEvento(Evento e) {
         for (int i = 0; i < eventos.size(); i++) {
             if (eventos.get(i).equals(e)) {
