@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Evento {
     private String titulo, data, hora, faci, desc;
-    private List<Participante> participantes;
+    private ArrayList<Participante> participantes;
 
     public Evento(String titulo, String data, String hora, String facilitador, String desc) {
         this.titulo = titulo;
@@ -59,7 +59,7 @@ public class Evento {
         this.faci = facilitador;
     }
 
-    public List getParticipantes() {
+    public ArrayList getParticipantes() {
         return participantes;
     }
 

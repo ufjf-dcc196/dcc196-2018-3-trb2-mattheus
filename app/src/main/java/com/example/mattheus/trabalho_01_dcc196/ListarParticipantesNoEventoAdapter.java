@@ -10,37 +10,37 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class ListarParticipantesAdapter extends RecyclerView.Adapter<ListarParticipantesAdapter.ViewHolder> {
+public class ListarParticipantesNoEventoAdapter extends RecyclerView.Adapter<ListarParticipantesNoEventoAdapter.ViewHolder> {
     private ArrayList<Participante> participantes = new ArrayList<>();
-    private OnParticipanteClickListener listener;
+    private OnParticipanteNoEventoClickListener listener;
 
 
-    public interface OnParticipanteClickListener {
-        void onParticipanteClick(View view, int position);
-        void onLongParticipanteClick(View view, int position);
+    public interface OnParticipanteNoEventoClickListener {
+        void onParticipanteNoEventoClick(View view, int position);
+        void onLongParticipanteNoEventoClick(View view, int position);
     }
 
-    public void setOnParticipanteClickListener(OnParticipanteClickListener listener){
+    public void setOnParticipanteNoEventoClickListener(OnParticipanteNoEventoClickListener listener){
         this.listener = listener;
     }
 
-    public ListarParticipantesAdapter(ArrayList<Participante> participantes) {
+    public ListarParticipantesNoEventoAdapter(ArrayList<Participante> participantes) {
         this.participantes = participantes;
     }
 
 
     @NonNull
     @Override
-    public ListarParticipantesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ListarParticipantesNoEventoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         Context context = viewGroup.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        View lstParticipantesView = inflater.inflate(R.layout.recycle_view_listar_participantes, viewGroup, false);
-        ViewHolder holder = new ViewHolder(lstParticipantesView);
+        View lstParticipantesNoEventoView = inflater.inflate(R.layout.recycle_view_listar_participantes_no_evento, viewGroup, false);
+        ViewHolder holder = new ViewHolder(lstParticipantesNoEventoView);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListarParticipantesAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ListarParticipantesNoEventoAdapter.ViewHolder holder, int position) {
         holder.txtNomeParticpante.setText(participantes.get(position).getNome());
     }
 
@@ -55,7 +55,7 @@ public class ListarParticipantesAdapter extends RecyclerView.Adapter<ListarParti
         public ViewHolder(View itemView) {
             super(itemView);
 
-            txtNomeParticpante= itemView.findViewById(R.id.txt_lista_dos_participantes);
+            txtNomeParticpante= itemView.findViewById(R.id.txt_lista_dos_participantes_no_evento);
 
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
@@ -63,7 +63,7 @@ public class ListarParticipantesAdapter extends RecyclerView.Adapter<ListarParti
                     if (listener!=null){
                         int position = getAdapterPosition();
                         if(position!= RecyclerView.NO_POSITION){
-                            listener.onLongParticipanteClick(view, position);
+                            listener.onLongParticipanteNoEventoClick(view, position);
                         }
                     }
                     return false;
@@ -77,7 +77,7 @@ public class ListarParticipantesAdapter extends RecyclerView.Adapter<ListarParti
                     if (listener!=null){
                         int position = getAdapterPosition();
                         if(position!= RecyclerView.NO_POSITION){
-                            listener.onParticipanteClick(v, position);
+                            listener.onParticipanteNoEventoClick(v, position);
                         }
                     }
                 }
@@ -91,7 +91,7 @@ public class ListarParticipantesAdapter extends RecyclerView.Adapter<ListarParti
             if (listener!=null){
                 int position = getAdapterPosition();
                 if(position!= RecyclerView.NO_POSITION){
-                    listener.onParticipanteClick(view, position);
+                    listener.onParticipanteNoEventoClick(view, position);
                 }
             }
         }
@@ -101,7 +101,7 @@ public class ListarParticipantesAdapter extends RecyclerView.Adapter<ListarParti
             if (listener!=null){
                 int position = getAdapterPosition();
                 if(position!= RecyclerView.NO_POSITION){
-                    listener.onLongParticipanteClick(view, position);
+                    listener.onLongParticipanteNoEventoClick(view, position);
                 }
             }
             return true;

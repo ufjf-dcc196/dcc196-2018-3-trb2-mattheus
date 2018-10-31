@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-    private ListarEventosAdapter adapter;
+    private static ListarEventosAdapter adapter;
 
     private Button btn_cadastrar_evento, btn_listar_participante, btn_cadastrar_participante;
 
@@ -21,6 +21,10 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String POSICAO_EVENTO = "Posição do Evento";
     private RecyclerView recyclerView;
+
+    public static void Dale() {
+        adapter.notifyDataSetChanged();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,15 +90,19 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == MainActivity.REQUEST_CADASTRO_EVENTO && resultCode== Activity.RESULT_OK && data != null){
+            adapter = new ListarEventosAdapter(Singleton.getInstance().getEventos());
             adapter.notifyDataSetChanged();
         }
         if(requestCode == MainActivity.REQUEST_CADASTRO_PARTICIPANTE && resultCode== Activity.RESULT_OK && data != null){
+            adapter = new ListarEventosAdapter(Singleton.getInstance().getEventos());
             adapter.notifyDataSetChanged();
         }
         if(requestCode == MainActivity.REQUEST_LISTAR_PARTICIPANTE && resultCode== Activity.RESULT_OK && data != null){
+            adapter = new ListarEventosAdapter(Singleton.getInstance().getEventos());
             adapter.notifyDataSetChanged();
         }
         if(requestCode == MainActivity.REQUEST_LISTAR_EVENTO && resultCode== Activity.RESULT_OK && data != null){
+            adapter = new ListarEventosAdapter(Singleton.getInstance().getEventos());
             adapter.notifyDataSetChanged();
         }
 

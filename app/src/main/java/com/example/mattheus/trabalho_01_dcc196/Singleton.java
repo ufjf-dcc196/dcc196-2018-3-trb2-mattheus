@@ -1,5 +1,7 @@
 package com.example.mattheus.trabalho_01_dcc196;
 
+import android.widget.EditText;
+
 import java.util.ArrayList;
 
 public class Singleton {
@@ -64,6 +66,13 @@ public class Singleton {
 
     public ArrayList<Participante> getParticipantes() {
         return participantes;
+    }
+
+    public ArrayList<Participante> getParticipantesNoEvento(Integer i){
+        ArrayList<Participante> p;
+        Evento e = Singleton.getInstance().getEventos().get(i);
+        p = e.getParticipantes();
+        return p;
     }
 
     public void addParticipante(Participante p) {

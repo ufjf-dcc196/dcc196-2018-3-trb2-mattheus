@@ -46,7 +46,7 @@ public class EditarDadosEventoActivity extends AppCompatActivity {
                 Singleton.getInstance().getEventos().get(id_evento).setHora(txt_edt_hora.getText().toString());
                 Singleton.getInstance().getEventos().get(id_evento).setFacilitador(txt_edt_facilitador.getText().toString());
                 Singleton.getInstance().getEventos().get(id_evento).setDescricao(txt_edt_desc.getText().toString());
-
+                MainActivity.Dale();
                 setResult(Activity.RESULT_OK, resultado);
                 finish();
             }
