@@ -4,16 +4,14 @@ import java.util.ArrayList;
 
 public class Participante {
     private String nome, email, cpf;
-    private ArrayList<Evento> eventos;
+    private ArrayList<Evento> eventos = new ArrayList();
 
     public Participante(String nome, String email, String cpf) {
         this.nome = nome;
         this.email = email;
         this.cpf = cpf;
-        eventos = new ArrayList();
     }
     public Participante(){
-
     }
 
     public String getNome() {

@@ -64,10 +64,15 @@ public class ListarDetalhesEventosActivity extends AppCompatActivity {
             @Override
             public void onLongParticipanteNoEventoClick(View view, int position) {
 
-                Participante p = Singleton.getInstance().getParticipantes().get(position);
+                Integer i  = Singleton.getInstance().getParticipantes()
+                        .indexOf(Singleton.getInstance().getParticipantesNoEvento(id_evento).get(position));
 
-                Singleton.getInstance().getEventos().get(id_evento).removeParticipante(p);
-                p.removeEvento(Singleton.getInstance().getEventos().get(id_evento));
+                Singleton.getInstance().getEventos().get(id_evento)
+                        .removeParticipante(Singleton.getInstance().getParticipantesNoEvento(id_evento).get(position));
+
+                Singleton.getInstance().getParticipantes().get(i)
+                        .removeEvento(Singleton.getInstance().getEventos().get(id_evento));
+
                 adapter.notifyItemRemoved(position);
 
             }
