@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_CADASTRO_PARTICIPANTE = 1;
     public static final int REQUEST_CADASTRO_EVENTO = 2;
     public static final int REQUEST_LISTAR_EVENTO = 3;
+    public static final String POSICAO_EVENTO = "Posição do Evento";
     private RecyclerView recyclerView;
 
     @Override
@@ -31,6 +32,25 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ListarEventosAdapter(Singleton.getInstance().getEventos());
         recyclerView.setAdapter(adapter);
 
+
+
+        adapter.setOnEventoClickListener(new ListarEventosAdapter.OnEventoClickListener() {
+            @Override
+            public void onEventoClick(View view, int position) {
+                Intent intent = new Intent(MainActivity.this, ListarDetalhesEventosActivity.class);
+                intent.putExtra(MainActivity.POSICAO_EVENTO,position);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongEventoClick(View view, int position) {
+                Evento e = Singleton.getInstance().getEventos().get(position);
+                Singleton.getInstance().removeAllParticipanteEvento(e);
+                Singleton.getInstance().removeEvento(e);
+                adapter.notifyItemRemoved(position);
+            }
+
+        });
 
 
         btn_cadastrar_participante.setOnClickListener(new View.OnClickListener() {
@@ -56,6 +76,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, MainActivity.REQUEST_LISTAR_EVENTO);
             }
         });
+
+
+
+
     }
 
 }

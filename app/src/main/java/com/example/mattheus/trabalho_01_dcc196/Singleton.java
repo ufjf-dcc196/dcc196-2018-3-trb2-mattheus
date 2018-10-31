@@ -1,22 +1,19 @@
 package com.example.mattheus.trabalho_01_dcc196;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Singleton {
 
     private static Singleton instance = new Singleton();
-    private ArrayList<Evento> eventos;
-    private ArrayList<Participante> participantes;
+    private ArrayList<Evento> eventos= new ArrayList<>();
+    private ArrayList<Participante> participantes= new ArrayList<>();
 
 
     private Singleton() {
-        eventos = new ArrayList<>();
         Evento e1 = new Evento("Android", "22/08", "12:00", "José Maria", "curso de desenvolvimento android");
         Evento e2 = new Evento("Xadrez", "22/09", "22:00", "Nina ALmeida", "curso para iniciantes de xadrez");
         Evento e3 = new Evento("Java", "01/01", "08:00", "Mauro", "Curso para aprendizado de Java");
 
-        participantes = new ArrayList<>();
         Participante p1 = new Participante("Matheus", "Matheus@ufjf.br", "12345678900");
         Participante p2 = new Participante("Lucas", "Lucass@ufjf.br", "12345678901");
         Participante p3 = new Participante("Rafael", "Rafael@ufjf.br", "12345678902");
@@ -45,6 +42,9 @@ public class Singleton {
 
     public void removeEvento(Evento e) {
         this.eventos.remove(e);
+    }
+    public void removeEvento(Integer i) {
+        this.eventos.remove(i);
     }
 
     public int getIndiceEvento(Evento e) {

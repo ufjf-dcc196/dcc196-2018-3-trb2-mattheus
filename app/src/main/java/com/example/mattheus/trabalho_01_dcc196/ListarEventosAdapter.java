@@ -59,6 +59,7 @@ public class ListarEventosAdapter extends RecyclerView.Adapter<ListarEventosAdap
             super(itemView);
 
             txtTituloEvento = itemView.findViewById(R.id.txt_lista_dos_eventos);
+
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
