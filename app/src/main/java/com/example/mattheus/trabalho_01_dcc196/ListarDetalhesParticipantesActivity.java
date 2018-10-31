@@ -1,5 +1,6 @@
 package com.example.mattheus.trabalho_01_dcc196;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,10 +30,7 @@ public class ListarDetalhesParticipantesActivity extends AppCompatActivity {
         txt_cpf = findViewById(R.id.txt_list_participante_cpf);
         btn_editar_participante = findViewById(R.id.btn_Editar_Participante);
 
-        txt_nome.setText(Singleton.getInstance().getParticipantes().get(id_participante).getNome());
-        txt_email.setText(Singleton.getInstance().getParticipantes().get(id_participante).getEmail());
-        txt_cpf.setText(Singleton.getInstance().getParticipantes().get(id_participante).getCPF());
-
+        updateData();
 
         btn_editar_participante.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +40,20 @@ public class ListarDetalhesParticipantesActivity extends AppCompatActivity {
                 startActivityForResult(intent,REQUEST_EDITAR_PARTICIPANTE);
             }
         });
+
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == ListarDetalhesParticipantesActivity.REQUEST_EDITAR_PARTICIPANTE && resultCode== Activity.RESULT_OK){
+            updateData();
+        }
+
+    }
+
+    protected void updateData(){
+        txt_nome.setText(Singleton.getInstance().getParticipantes().get(id_participante).getNome());
+        txt_email.setText(Singleton.getInstance().getParticipantes().get(id_participante).getEmail());
+        txt_cpf.setText(Singleton.getInstance().getParticipantes().get(id_participante).getCPF());
 
     }
 }

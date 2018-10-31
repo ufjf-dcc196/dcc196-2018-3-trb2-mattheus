@@ -31,12 +31,7 @@ public class ListarDetalhesEventosActivity extends AppCompatActivity {
         txt_descricao = findViewById(R.id.txt_list_evento_desc);
         btn_editar_evento = findViewById(R.id.btn_Editar_Evento);
 
-        txt_titulo.setText(Singleton.getInstance().getEventos().get(id_evento).getTitulo());
-        txt_dia.setText(Singleton.getInstance().getEventos().get(id_evento).getData());
-        txt_hora.setText(Singleton.getInstance().getEventos().get(id_evento).getHora());
-        txt_facilitador.setText(Singleton.getInstance().getEventos().get(id_evento).getFacilitador());
-        txt_descricao.setText(Singleton.getInstance().getEventos().get(id_evento).getDescricao());
-
+        updateData();
 
         btn_editar_evento.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +41,23 @@ public class ListarDetalhesEventosActivity extends AppCompatActivity {
                 startActivityForResult(intent,REQUEST_EDITAR_EVENTO);
             }
         });
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == ListarDetalhesEventosActivity.REQUEST_EDITAR_EVENTO && resultCode== Activity.RESULT_OK){
+            updateData();
+        }
 
     }
+
+    protected void updateData(){
+        txt_titulo.setText(Singleton.getInstance().getEventos().get(id_evento).getTitulo());
+        txt_dia.setText(Singleton.getInstance().getEventos().get(id_evento).getData());
+        txt_hora.setText(Singleton.getInstance().getEventos().get(id_evento).getHora());
+        txt_facilitador.setText(Singleton.getInstance().getEventos().get(id_evento).getFacilitador());
+        txt_descricao.setText(Singleton.getInstance().getEventos().get(id_evento).getDescricao());
+
+    }
+
 }

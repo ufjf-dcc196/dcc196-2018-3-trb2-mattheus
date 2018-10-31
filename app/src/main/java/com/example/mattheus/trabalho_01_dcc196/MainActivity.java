@@ -13,9 +13,12 @@ public class MainActivity extends AppCompatActivity {
     private ListarEventosAdapter adapter;
 
     private Button btn_cadastrar_evento, btn_listar_participante, btn_cadastrar_participante;
+
     public static final int REQUEST_CADASTRO_PARTICIPANTE = 1;
     public static final int REQUEST_CADASTRO_EVENTO = 2;
     public static final int REQUEST_LISTAR_EVENTO = 3;
+    public static final int REQUEST_LISTAR_PARTICIPANTE = 4;
+
     public static final String POSICAO_EVENTO = "Posição do Evento";
     private RecyclerView recyclerView;
 
@@ -40,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             public void onEventoClick(View view, int position) {
                 Intent intent = new Intent(MainActivity.this, ListarDetalhesEventosActivity.class);
                 intent.putExtra(MainActivity.POSICAO_EVENTO,position);
-                startActivity(intent);
+                startActivityForResult(intent, MainActivity.REQUEST_LISTAR_EVENTO);
             }
 
             @Override
@@ -52,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-
 
         btn_cadastrar_participante.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ListarParticipantesActivity.class);
-                startActivityForResult(intent, MainActivity.REQUEST_LISTAR_EVENTO);
+                startActivityForResult(intent, MainActivity.REQUEST_LISTAR_PARTICIPANTE);
             }
         });
 
@@ -82,7 +84,17 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if(requestCode == MainActivity.REQUEST_CADASTRO_EVENTO && resultCode== Activity.RESULT_OK && data != null){
+            adapter.notifyDataSetChanged();
+        }
+        if(requestCode == MainActivity.REQUEST_CADASTRO_PARTICIPANTE && resultCode== Activity.RESULT_OK && data != null){
+            adapter.notifyDataSetChanged();
+        }
+        if(requestCode == MainActivity.REQUEST_LISTAR_PARTICIPANTE && resultCode== Activity.RESULT_OK && data != null){
+            adapter.notifyDataSetChanged();
+        }
+        if(requestCode == MainActivity.REQUEST_LISTAR_EVENTO && resultCode== Activity.RESULT_OK && data != null){
             adapter.notifyDataSetChanged();
         }
 

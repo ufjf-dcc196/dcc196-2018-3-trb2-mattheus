@@ -39,13 +39,9 @@ public class EditarDadosParticipanteActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent resultado = new Intent();
 
-                Participante edt_p = new Participante();
-
-                edt_p.setNome(txt_edt_nome_participante.getText().toString());
-                edt_p.setEmail(txt_edt_email_participante.getText().toString());
-                edt_p.setCPF(txt_edt_cpf_participante.getText().toString());
-
-                Singleton.getInstance().updateParticipante(edt_p);
+                Singleton.getInstance().getParticipantes().get(id_participante).setNome(txt_edt_nome_participante.getText().toString());
+                Singleton.getInstance().getParticipantes().get(id_participante).setEmail(txt_edt_email_participante.getText().toString());
+                Singleton.getInstance().getParticipantes().get(id_participante).setCPF(txt_edt_cpf_participante.getText().toString());
 
                 setResult(Activity.RESULT_OK, resultado);
                 finish();
