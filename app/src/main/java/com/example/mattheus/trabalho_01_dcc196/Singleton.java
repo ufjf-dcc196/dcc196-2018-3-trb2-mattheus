@@ -99,14 +99,4 @@ public class Singleton {
         }
     }
 
-    public void setEventosDisponiveis(int index){
-
-        ArrayList<Evento> e = getEventos();
-        for (Evento evento: getParticipantes().get(index).getEventos()) {
-            e.remove(evento);
-        }
-        getParticipantes().get(index).setEventosNaoCadstrados(e);
-    }
-
-
 }

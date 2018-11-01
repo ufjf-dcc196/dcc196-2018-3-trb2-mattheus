@@ -64,10 +64,7 @@ public class ListarDetalhesParticipantesActivity extends AppCompatActivity {
             public void onEventoCadastradosClick(View view, int position) {
 
                 Integer i = Singleton.getInstance().getEventos().indexOf
-                        (Singleton.getInstance().getEventos().get(position));
-
-                Singleton.getInstance().getEventos().get(i).removeParticipante
-                        (Singleton.getInstance().getParticipantes().get(id_participante));
+                        (Singleton.getInstance().getParticipantes().get(id_participante).getEventos().get(position));
 
                 Singleton.getInstance().getParticipantes().get(id_participante).removeEvento
                         (Singleton.getInstance().getEventos().get(i));
@@ -75,6 +72,8 @@ public class ListarDetalhesParticipantesActivity extends AppCompatActivity {
                 Singleton.getInstance().getParticipantes().get(id_participante).addEventoNaoCadastrado
                         (Singleton.getInstance().getEventos().get(i));
 
+                Singleton.getInstance().getEventos().get(i).removeParticipante
+                        (Singleton.getInstance().getParticipantes().get(id_participante));
 
                 adapter_disponiveis.notifyDataSetChanged();
                 adapter_cadastrados.notifyDataSetChanged();
@@ -85,7 +84,7 @@ public class ListarDetalhesParticipantesActivity extends AppCompatActivity {
             @Override
             public void onEventoDisponiveisClick(View view, int position) {
                 Integer i = Singleton.getInstance().getEventos().indexOf
-                        (Singleton.getInstance().getEventos().get(position));
+                        (Singleton.getInstance().getParticipantes().get(id_participante).getEventosNaoCadstrados().get(position));
 
                 Singleton.getInstance().getParticipantes().get(id_participante).
                         addEvento(Singleton.getInstance().getEventos().get(i));
