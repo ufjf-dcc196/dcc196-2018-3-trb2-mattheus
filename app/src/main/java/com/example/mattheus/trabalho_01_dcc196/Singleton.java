@@ -95,6 +95,7 @@ public class Singleton {
             if (p.getEventos().contains(e)) {
                 int i = Singleton.getInstance().getParticipantes().indexOf(p);
                 Singleton.getInstance().getParticipantes().get(i).removeEvento(e);
+                Singleton.getInstance().getParticipantes().get(i).removeEventoNaoCadastrado(e);
             }
         }
     }

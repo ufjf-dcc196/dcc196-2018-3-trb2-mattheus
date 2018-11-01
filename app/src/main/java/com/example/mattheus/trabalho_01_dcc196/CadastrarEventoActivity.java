@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+
 public class CadastrarEventoActivity extends AppCompatActivity {
     private EditText txt_titulo, txt_dia, txt_hora, txt_facilitador, txt_desc;
     private Button btn_salvar_evento;
@@ -31,6 +33,10 @@ public class CadastrarEventoActivity extends AppCompatActivity {
 
                 Evento e = new Evento(txt_titulo.getText().toString(), txt_dia.getText().toString(),txt_hora.getText().toString(), txt_facilitador.getText().toString(),txt_desc.getText().toString());
                 Singleton.getInstance().addEvento(e);
+
+                for (Participante p:Singleton.getInstance().getParticipantes()) {
+                    Singleton.getInstance().getParticipantes().get(Singleton.getInstance().getParticipantes().indexOf(p)).addEventoNaoCadastrado(e);
+                }
 
                 setResult(Activity.RESULT_OK, resultado);
                 finish();

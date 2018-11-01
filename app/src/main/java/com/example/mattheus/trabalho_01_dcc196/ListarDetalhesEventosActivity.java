@@ -72,6 +72,8 @@ public class ListarDetalhesEventosActivity extends AppCompatActivity {
 
                 Singleton.getInstance().getParticipantes().get(i)
                         .removeEvento(Singleton.getInstance().getEventos().get(id_evento));
+                Singleton.getInstance().getParticipantes().get(i)
+                        .addEventoNaoCadastrado(Singleton.getInstance().getEventos().get(id_evento));
 
                 adapter.notifyItemRemoved(position);
 
