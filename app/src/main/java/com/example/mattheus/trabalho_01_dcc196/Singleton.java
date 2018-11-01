@@ -23,14 +23,23 @@ public class Singleton {
         participantes.add(p2);
         participantes.add(p3);
 
+
         e1.addParticipante(p1);
         e2.addParticipante(p2);
         e3.addParticipante(p3);
 
+        p1.addEventoNaoCadastrado(e2);
+        p1.addEventoNaoCadastrado(e3);
+
+        p2.addEventoNaoCadastrado(e1);
+        p2.addEventoNaoCadastrado(e3);
+
+        p3.addEventoNaoCadastrado(e1);
+        p3.addEventoNaoCadastrado(e2);
+
         p1.addEvento(e1);
         p2.addEvento(e2);
         p3.addEvento(e3);
-
 
         eventos.add(e1);
         eventos.add(e2);
@@ -51,15 +60,6 @@ public class Singleton {
 
     public void removeEvento(Evento e) {
         this.eventos.remove(e);
-    }
-
-    public int getIndiceEvento(Evento e) {
-        for (int i = 0; i < eventos.size(); i++) {
-            if (eventos.get(i).equals(e)) {
-                return i;
-            }
-        }
-        return -1;
     }
 
     public void removeParticipanteEvento(Participante p) {
@@ -99,19 +99,14 @@ public class Singleton {
         }
     }
 
-    public void removeParticipanteDoEvento(Evento e, Participante p) {
-        int indice = Singleton.getInstance().getParticipantes().indexOf(p);
-        Singleton.getInstance().getParticipantes().get(indice).removeEvento(e);
-    }
+    public void setEventosDisponiveis(int index){
 
-
-
-    public ArrayList<Evento> getEventosDisponiveis(int index){
-
-        ArrayList<Evento> e = this.getEventos();
-        for (Evento evento: this.getParticipantes().get(index).getEventos()) {
+        ArrayList<Evento> e = getEventos();
+        for (Evento evento: getParticipantes().get(index).getEventos()) {
             e.remove(evento);
         }
-        return e;
+        getParticipantes().get(index).setEventosNaoCadstrados(e);
     }
+
+
 }

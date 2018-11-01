@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Evento {
     private String titulo, data, hora, faci, desc;
-    private ArrayList<Participante> participantes =  new ArrayList();
+    private ArrayList<Participante> participantes =  new ArrayList<>();
 
     public Evento(String titulo, String data, String hora, String facilitador, String desc) {
         this.titulo = titulo;

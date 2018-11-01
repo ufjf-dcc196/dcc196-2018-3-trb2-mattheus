@@ -48,7 +48,7 @@ public class ListarDetalhesParticipantesActivity extends AppCompatActivity {
         recyclerView_eventosDisponiveis.setLayoutManager(new LinearLayoutManager(this));
 
         adapter_disponiveis = new ListarEventosDisponiveisAdapter(
-                Singleton.getInstance().getEventosDisponiveis(id_participante));
+                Singleton.getInstance().getParticipantes().get(id_participante).getEventosNaoCadstrados());
 
         recyclerView_eventosDisponiveis.setAdapter(adapter_disponiveis);
 
@@ -62,32 +62,41 @@ public class ListarDetalhesParticipantesActivity extends AppCompatActivity {
         adapter_cadastrados.setOnEventoCadastradosClickListener(new ListarEventosCadastradosAdapter.OnEventoCadastradosClickListener() {
             @Override
             public void onEventoCadastradosClick(View view, int position) {
-                Evento e = Singleton.getInstance().getEventos().get(position);
-                Integer i = Singleton.getInstance().getEventos().indexOf(e);
 
-                Singleton.getInstance().getEventos().get(i).removeParticipante(
-                        Singleton.getInstance().getParticipantes().get(id_participante));
+                Integer i = Singleton.getInstance().getEventos().indexOf
+                        (Singleton.getInstance().getEventos().get(position));
 
-                Singleton.getInstance().getParticipantes().get(id_participante).removeEvento(position);
+                Singleton.getInstance().getEventos().get(i).removeParticipante
+                        (Singleton.getInstance().getParticipantes().get(id_participante));
+
+                Singleton.getInstance().getParticipantes().get(id_participante).removeEvento
+                        (Singleton.getInstance().getEventos().get(i));
+
+                Singleton.getInstance().getParticipantes().get(id_participante).addEventoNaoCadastrado
+                        (Singleton.getInstance().getEventos().get(i));
 
 
                 adapter_disponiveis.notifyDataSetChanged();
-                adapter_cadastrados.notifyItemRemoved(position);
+                adapter_cadastrados.notifyDataSetChanged();
             }
         });
 
         adapter_disponiveis.setOnEventoDisponiveisClickListener(new ListarEventosDisponiveisAdapter.OnEventoDisponiveisClickListener() {
             @Override
             public void onEventoDisponiveisClick(View view, int position) {
+                Integer i = Singleton.getInstance().getEventos().indexOf
+                        (Singleton.getInstance().getEventos().get(position));
 
-                Integer i = Singleton.getInstance().getEventos().
-                        indexOf(Singleton.getInstance().getEventosDisponiveis(id_participante).get(position));
+                Singleton.getInstance().getParticipantes().get(id_participante).
+                        addEvento(Singleton.getInstance().getEventos().get(i));
 
-                Singleton.getInstance().getParticipantes().get(id_participante)
-                        .addEvento(Singleton.getInstance().getEventos().get(i));
+                Singleton.getInstance().getParticipantes().get(id_participante).
+                        removeEventoNaoCadastrado(Singleton.getInstance().getEventos().get(i));
 
+                Singleton.getInstance().getEventos().get(i).
+                        addParticipante(Singleton.getInstance().getParticipantes().get(id_participante));
 
-                adapter_disponiveis.notifyItemRemoved(position);
+                adapter_disponiveis.notifyDataSetChanged();
                 adapter_cadastrados.notifyDataSetChanged();
             }
         });

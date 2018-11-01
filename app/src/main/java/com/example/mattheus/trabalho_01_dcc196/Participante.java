@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Participante {
     private String nome, email, cpf;
-    private ArrayList<Evento> eventos = new ArrayList();
-    private ArrayList<Evento> eventosNaoCadstrados = new ArrayList();
+    private ArrayList<Evento> eventos = new ArrayList<>();
+    private ArrayList<Evento> eventosNaoCadstrados = new ArrayList<>();
 
     public Participante(String nome, String email, String cpf) {
         this.nome = nome;
@@ -44,14 +44,27 @@ public class Participante {
     }
 
     public void addEvento(Evento evento) {
-        eventos.add(evento);
+        if(!this.eventos.contains(evento))this.eventos.add(evento);
     }
 
-    public void removeEvento(Evento e){
-        eventos.remove(e);
+    public void removeEvento(Evento evento){
+        if(this.eventos.contains(evento))this.eventos.remove(evento);
     }
 
-    public void removeEvento(int i){
-        eventos.remove(i);
+    public void addEventoNaoCadastrado(Evento evento) {
+        if(!this.eventosNaoCadstrados.contains(evento))this.eventosNaoCadstrados.add(evento);
     }
+    public void removeEventoNaoCadastrado(Evento evento) {
+        if(this.eventosNaoCadstrados.contains(evento))this.eventosNaoCadstrados.remove(evento);
+    }
+
+    public ArrayList<Evento> getEventosNaoCadstrados() {
+        return eventosNaoCadstrados;
+    }
+
+    public void setEventosNaoCadstrados(ArrayList<Evento> eventosNaoCadstrados) {
+        this.eventosNaoCadstrados = eventosNaoCadstrados;
+    }
+
+
 }
