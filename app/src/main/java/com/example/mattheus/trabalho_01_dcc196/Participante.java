@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Participante {
     private String nome, email, cpf;
     private ArrayList<Evento> eventos = new ArrayList();
+    private ArrayList<Evento> eventosNaoCadstrados = new ArrayList();
 
     public Participante(String nome, String email, String cpf) {
         this.nome = nome;
@@ -42,15 +43,15 @@ public class Participante {
         return eventos;
     }
 
-    public Evento getEvento(int index) {
-        return eventos.get(index);
-    }
-
     public void addEvento(Evento evento) {
         eventos.add(evento);
     }
 
     public void removeEvento(Evento e){
         eventos.remove(e);
+    }
+
+    public void removeEvento(int i){
+        eventos.remove(i);
     }
 }

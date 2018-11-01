@@ -1,7 +1,7 @@
 package com.example.mattheus.trabalho_01_dcc196;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class Evento {
     private String titulo, data, hora, faci, desc;

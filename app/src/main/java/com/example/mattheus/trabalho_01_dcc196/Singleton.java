@@ -10,7 +10,6 @@ public class Singleton {
     private ArrayList<Evento> eventos= new ArrayList<>();
     private ArrayList<Participante> participantes= new ArrayList<>();
 
-
     private Singleton() {
         Evento e1 = new Evento("Android", "22/08", "12:00", "José Maria", "curso de desenvolvimento android");
         Evento e2 = new Evento("Xadrez", "22/09", "22:00", "Nina ALmeida", "curso para iniciantes de xadrez");
@@ -19,12 +18,20 @@ public class Singleton {
         Participante p1 = new Participante("Matheus", "Matheus@ufjf.br", "12345678900");
         Participante p2 = new Participante("Lucas", "Lucass@ufjf.br", "12345678901");
         Participante p3 = new Participante("Rafael", "Rafael@ufjf.br", "12345678902");
+
         participantes.add(p1);
         participantes.add(p2);
         participantes.add(p3);
+
         e1.addParticipante(p1);
         e2.addParticipante(p2);
         e3.addParticipante(p3);
+
+        p1.addEvento(e1);
+        p2.addEvento(e2);
+        p3.addEvento(e3);
+
+
         eventos.add(e1);
         eventos.add(e2);
         eventos.add(e3);
@@ -95,5 +102,16 @@ public class Singleton {
     public void removeParticipanteDoEvento(Evento e, Participante p) {
         int indice = Singleton.getInstance().getParticipantes().indexOf(p);
         Singleton.getInstance().getParticipantes().get(indice).removeEvento(e);
+    }
+
+
+
+    public ArrayList<Evento> getEventosDisponiveis(int index){
+
+        ArrayList<Evento> e = this.getEventos();
+        for (Evento evento: this.getParticipantes().get(index).getEventos()) {
+            e.remove(evento);
+        }
+        return e;
     }
 }
