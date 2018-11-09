@@ -37,7 +37,7 @@ public class CadastrarEventoActivity extends AppCompatActivity {
                 for (Participante p:Singleton.getInstance().getParticipantes()) {
                     Singleton.getInstance().getParticipantes().get(Singleton.getInstance().getParticipantes().indexOf(p)).addEventoNaoCadastrado(e);
                 }
-
+                MainActivity.Dale();
                 setResult(Activity.RESULT_OK, resultado);
                 finish();
 
