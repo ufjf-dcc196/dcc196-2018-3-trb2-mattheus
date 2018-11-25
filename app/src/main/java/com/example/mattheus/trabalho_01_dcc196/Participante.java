@@ -8,12 +8,19 @@ public class Participante {
     private ArrayList<Evento> eventos = new ArrayList<>();
     private ArrayList<Evento> eventosNaoCadstrados = new ArrayList<>();
 
+    public Participante(String nome, String email, String cpf) {
+        this.nome = nome;
+        this.email = email;
+        this.cpf = cpf;
+    }
+
     public Participante(Integer id, String nome, String email, String cpf) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.cpf = cpf;
     }
+
     public Participante(){
     }
 

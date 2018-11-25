@@ -11,13 +11,13 @@ public class Singleton {
     private ArrayList<Participante> participantes= new ArrayList<>();
 
     private Singleton() {
-        Evento e1 = new Evento("Android", "22/08", "12:00", "José Maria", "curso de desenvolvimento android");
-        Evento e2 = new Evento("Xadrez", "22/09", "22:00", "Nina ALmeida", "curso para iniciantes de xadrez");
-        Evento e3 = new Evento("Java", "01/01", "08:00", "Mauro", "Curso para aprendizado de Java");
+        Evento e1 = new Evento(1,"Android", "22/08", "12:00", "José Maria", "curso de desenvolvimento android");
+        Evento e2 = new Evento(2,"Xadrez", "22/09", "22:00", "Nina ALmeida", "curso para iniciantes de xadrez");
+        Evento e3 = new Evento(3,"Java", "01/01", "08:00", "Mauro", "Curso para aprendizado de Java");
 
-        Participante p1 = new Participante("Matheus", "Matheus@ufjf.br", "12345678900");
-        Participante p2 = new Participante("Lucas", "Lucass@ufjf.br", "12345678901");
-        Participante p3 = new Participante("Rafael", "Rafael@ufjf.br", "12345678902");
+        Participante p1 = new Participante(1,"Matheus", "Matheus@ufjf.br", "12345678900");
+        Participante p2 = new Participante(2,"Lucas", "Lucass@ufjf.br", "12345678901");
+        Participante p3 = new Participante(3,"Rafael", "Rafael@ufjf.br", "12345678902");
 
         participantes.add(p1);
         participantes.add(p2);
