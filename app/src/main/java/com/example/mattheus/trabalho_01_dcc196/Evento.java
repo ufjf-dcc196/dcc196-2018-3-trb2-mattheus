@@ -4,10 +4,11 @@ import java.util.ArrayList;
 
 
 public class Evento {
+    private Integer id;
     private String titulo, data, hora, faci, desc;
     private ArrayList<Participante> participantes =  new ArrayList<>();
 
-    public Evento(String titulo, String data, String hora, String facilitador, String desc) {
+    public Evento(String id, String titulo, String data, String hora, String facilitador, String desc) {
         this.titulo = titulo;
         this.data = data;
         this.hora = hora;
@@ -18,6 +19,14 @@ public class Evento {
     public Evento(){
 
     }
+    public Integer getID() {
+        return id;
+    }
+
+    public void setID(Integer id) {
+        this.id = id;
+    }
+
     public String getTitulo() {
         return titulo;
     }
