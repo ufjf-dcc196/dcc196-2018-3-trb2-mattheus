@@ -16,6 +16,11 @@ public class ListarEventosAdapter extends RecyclerView.Adapter<ListarEventosAdap
     private ArrayList<Evento> eventos = new ArrayList<>();
     private OnEventoClickListener listener;
 
+    public void setEventos(ArrayList<Evento> e) {
+        eventos = e;
+        notifyDataSetChanged();
+    }
+
     public interface OnEventoClickListener {
         void onEventoClick(View view, int position);
         void onLongEventoClick(View view, int position);

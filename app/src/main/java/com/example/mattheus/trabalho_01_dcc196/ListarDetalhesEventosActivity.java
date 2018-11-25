@@ -14,7 +14,7 @@ public class ListarDetalhesEventosActivity extends AppCompatActivity {
     private ListarParticipantesNoEventoAdapter adapter;
     private TextView txt_titulo, txt_dia, txt_hora, txt_facilitador, txt_descricao;
     private Button btn_editar_evento;
-    private int id_evento;
+    private Integer id_evento;
     private static final int REQUEST_EDITAR_EVENTO = 1;
     private static final String POSICAO_PARTICIPANTE = "Posição do Participante";
     public static final String ID_EVENTO = "Id do Evento";
@@ -25,13 +25,18 @@ public class ListarDetalhesEventosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_detalhes_eventos);
 
+        EventoDAO.getInstance().inicializarDBHelper(getApplicationContext());
+        ParticipanteDAO.getInstance().inicializarDBHelper(getApplicationContext());
+
         final Intent intent = getIntent();
         Bundle bundleResult = intent.getExtras();
         id_evento = bundleResult.getInt(MainActivity.POSICAO_EVENTO);
 
         recyclerView = findViewById(R.id.recyclerView_Participantes_no_Evento);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ListarParticipantesNoEventoAdapter(Singleton.getInstance().getParticipantesNoEvento(id_evento));
+        adapter = new ListarParticipantesNoEventoAdapter(
+                EventoParticipanteDAO.getInstance().getEventoParticipantes(id_evento)
+        );
         recyclerView.setAdapter(adapter);
 
         txt_titulo = findViewById(R.id.txt_list_evento_titulo);
@@ -42,6 +47,9 @@ public class ListarDetalhesEventosActivity extends AppCompatActivity {
         btn_editar_evento = findViewById(R.id.btn_Editar_Evento);
 
         updateData();
+
+
+
 
         btn_editar_evento.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,16 +72,12 @@ public class ListarDetalhesEventosActivity extends AppCompatActivity {
             @Override
             public void onLongParticipanteNoEventoClick(View view, int position) {
 
-                Integer i  = Singleton.getInstance().getParticipantes()
-                        .indexOf(Singleton.getInstance().getParticipantesNoEvento(id_evento).get(position));
+                Integer id_participante  = ParticipanteDAO.getInstance()
+                        .getParticipantes().get(position).getID();
 
-                Singleton.getInstance().getEventos().get(id_evento)
-                        .removeParticipante(Singleton.getInstance().getParticipantesNoEvento(id_evento).get(position));
 
-                Singleton.getInstance().getParticipantes().get(i)
-                        .removeEvento(Singleton.getInstance().getEventos().get(id_evento));
-                Singleton.getInstance().getParticipantes().get(i)
-                        .addEventoNaoCadastrado(Singleton.getInstance().getEventos().get(id_evento));
+                EventoParticipanteDAO.getInstance().removeParticipanteEvento(id_evento,id_participante);
+
 
                 adapter.notifyItemRemoved(position);
 
@@ -94,12 +98,11 @@ public class ListarDetalhesEventosActivity extends AppCompatActivity {
     }
 
     protected void updateData(){
-        txt_titulo.setText(Singleton.getInstance().getEventos().get(id_evento).getTitulo());
-        txt_dia.setText(Singleton.getInstance().getEventos().get(id_evento).getData());
-        txt_hora.setText(Singleton.getInstance().getEventos().get(id_evento).getHora());
-        txt_facilitador.setText(Singleton.getInstance().getEventos().get(id_evento).getFacilitador());
-        txt_descricao.setText(Singleton.getInstance().getEventos().get(id_evento).getDescricao());
-
+        txt_titulo.setText(EventoDAO.getInstance().getEventoById(id_evento).getTitulo());
+        txt_dia.setText(EventoDAO.getInstance().getEventoById(id_evento).getData());
+        txt_hora.setText(EventoDAO.getInstance().getEventoById(id_evento).getHora());
+        txt_facilitador.setText(EventoDAO.getInstance().getEventoById(id_evento).getFacilitador());
+        txt_descricao.setText(EventoDAO.getInstance().getEventoById(id_evento).getDescricao());
     }
 
 }

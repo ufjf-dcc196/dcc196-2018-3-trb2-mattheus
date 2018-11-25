@@ -9,7 +9,7 @@ public class TrabalhoContract {
     public static final String SEP = ",";
 
     public static final class EventoTable implements BaseColumns {
-        public static final String TABLE_NAME = "evento";
+        public static final String TABLE_NAME = "Evento";
         public static final String COLUMN_NAME_TITULO = "titulo";
         public static final String COLUMN_NAME_DATA = "data";
         public static final String COLUMN_NAME_HORA = "hora";
@@ -35,7 +35,7 @@ public class TrabalhoContract {
 
 
     public static final class ParticipanteTable implements BaseColumns {
-        public static final String TABLE_NAME = "participante";
+        public static final String TABLE_NAME = "Participante";
         public static final String COLUMN_NAME_NOME = "nome";
         public static final String COLUMN_NAME_EMAIL = "email";
         public static final String COLUMN_NAME_CPF = "cpf";
@@ -55,7 +55,7 @@ public class TrabalhoContract {
 
 
     public final class EventoParticipanteTable implements BaseColumns {
-        public final static String TABLE_NAME = "Evento_Participante";
+        public final static String TABLE_NAME = "EventoParticipante";
         public final static String COLUMN_NAME_ID_EVENTO = "ID_EVENTO";
         public final static String COLUMN_NAME_ID_PARTICIPANTE = "ID_PARTICIPANTE";
 

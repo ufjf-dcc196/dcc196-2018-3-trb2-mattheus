@@ -104,6 +104,12 @@ public class EventoParticipanteDAO {
         db.delete(TrabalhoContract.EventoParticipanteTable.TABLE_NAME,"ID_EVENTO = ? AND ID_PARTICIPANTE = ?",ids_Where);
     }
 
+    public void removerAllParticipantesEvento(int id){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db.delete("EventoParticipante","ID_EVENTO=? "
+                ,new String[]{String.valueOf(id)});
+
+    }
 
 
     private Cursor getAllParticipantesEventosBanco(int id, String argumento) {

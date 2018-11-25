@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.rcl_View_Eventos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ListarEventosAdapter(Singleton.getInstance().getEventos());
+        adapter = new ListarEventosAdapter(EventoDAO.getInstance().getEventos());
         recyclerView.setAdapter(adapter);
 
 
@@ -45,16 +45,20 @@ public class MainActivity extends AppCompatActivity {
         adapter.setOnEventoClickListener(new ListarEventosAdapter.OnEventoClickListener() {
             @Override
             public void onEventoClick(View view, int position) {
+                Integer id_evento = EventoDAO.getInstance().getEventos().get(position).getID();
                 Intent intent = new Intent(MainActivity.this, ListarDetalhesEventosActivity.class);
-                intent.putExtra(MainActivity.POSICAO_EVENTO,position);
+                intent.putExtra(MainActivity.POSICAO_EVENTO,id_evento);
                 startActivityForResult(intent, MainActivity.REQUEST_LISTAR_EVENTO);
             }
 
             @Override
             public void onLongEventoClick(View view, int position) {
-                Evento e = Singleton.getInstance().getEventos().get(position);
-                Singleton.getInstance().removeAllParticipanteEvento(e);
-                Singleton.getInstance().removeEvento(e);
+                Integer id_evento = EventoDAO.getInstance().getEventos().get(position).getID();
+                EventoDAO.getInstance().removeEvento(EventoDAO.getInstance().getEventos().get(position));
+                EventoParticipanteDAO.getInstance().inicializarDBHelper(getApplicationContext());
+                EventoParticipanteDAO.getInstance().removerAllParticipantesEvento(id_evento);
+
+                adapter.setEventos(EventoDAO.getInstance().getEventos());
                 adapter.notifyItemRemoved(position);
             }
 
@@ -84,6 +88,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.setEventos(EventoDAO.getInstance().getEventos());
     }
 
 }

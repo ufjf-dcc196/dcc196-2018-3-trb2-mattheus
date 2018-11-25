@@ -17,25 +17,26 @@ public class ListarParticipantesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_participantes);
 
+        ParticipanteDAO.getInstance().inicializarDBHelper(getApplicationContext());
 
         recyclerView = findViewById(R.id.rclv_listar_participantes);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ListarParticipantesAdapter(Singleton.getInstance().getParticipantes());
+        adapter = new ListarParticipantesAdapter(ParticipanteDAO.getInstance().getParticipantes());
         recyclerView.setAdapter(adapter);
 
         adapter.setOnParticipanteClickListener(new ListarParticipantesAdapter.OnParticipanteClickListener() {
             @Override
             public void onParticipanteClick(View view, int position) {
+                Integer id_participante = ParticipanteDAO.getInstance().getParticipantes().get(position).getID();
                 Intent intent = new Intent(ListarParticipantesActivity.this,ListarDetalhesParticipantesActivity.class);
-                intent.putExtra(ListarParticipantesActivity.POSICAO_PARTICIPANTE,position);
+                intent.putExtra(ListarParticipantesActivity.POSICAO_PARTICIPANTE,id_participante);
                 startActivity(intent);
             }
 
             @Override
             public void onLongParticipanteClick(View view, int position) {
-                Participante p = Singleton.getInstance().getParticipantes().get(position);
-                Singleton.getInstance().removeParticipanteEvento(p);
-                Singleton.getInstance().removeParticipante(p);
+                ParticipanteDAO.getInstance().removeParticipante(ParticipanteDAO.getInstance().getParticipantes().get(position));
+                adapter.setParticipantes(ParticipanteDAO.getInstance().getParticipantes());
                 adapter.notifyItemRemoved(position);
             }
         });

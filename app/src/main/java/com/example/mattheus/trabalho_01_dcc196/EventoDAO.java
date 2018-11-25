@@ -63,6 +63,25 @@ public class EventoDAO {
         return eventos;
     }
 
+    public Evento getEventoById(int idEvento){
+        int indexTituloEvento = cursor.getColumnIndexOrThrow(TrabalhoContract.EventoTable.COLUMN_NAME_TITULO);
+        int indexDataEvento = cursor.getColumnIndexOrThrow(TrabalhoContract.EventoTable.COLUMN_NAME_DATA);
+        int indexHoraEvento = cursor.getColumnIndexOrThrow(TrabalhoContract.EventoTable.COLUMN_NAME_HORA);
+        int indexFacilitadorEvento = cursor.getColumnIndexOrThrow(TrabalhoContract.EventoTable.COLUMN_NAME_FACILITADOR);
+        int indexDescricaoEvento = cursor.getColumnIndexOrThrow(TrabalhoContract.EventoTable.COLUMN_NAME_DESCRICAO);
+        int indexIdEvento = cursor.getColumnIndexOrThrow(TrabalhoContract.EventoTable._ID);
+        Evento eventoSolicitado = null;
+        if(cursor.moveToFirst()) {
+            eventoSolicitado = new Evento();
+            eventoSolicitado.setTitulo(cursor.getString(indexTituloEvento));
+            eventoSolicitado.setData(cursor.getString(indexDataEvento));
+            eventoSolicitado.setHora(cursor.getString(indexHoraEvento));
+            eventoSolicitado.setFacilitador(cursor.getString(indexFacilitadorEvento));
+            eventoSolicitado.setDescricao(cursor.getString(indexDescricaoEvento));
+            eventoSolicitado.setID(Integer.parseInt(cursor.getString(indexIdEvento)));
+        }
+        return eventoSolicitado;
+    }
 
     public void addEvento(Evento e){
         SQLiteDatabase db = dbHelper.getWritableDatabase();

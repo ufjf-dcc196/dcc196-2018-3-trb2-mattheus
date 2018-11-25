@@ -27,7 +27,8 @@ public class ListarDetalhesParticipantesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_detalhes_participantes);
-
+        ParticipanteDAO.getInstance().inicializarDBHelper(getApplicationContext());
+        EventoParticipanteDAO.getInstance().inicializarDBHelper(getApplicationContext());
 
         final Intent intent = getIntent();
         Bundle bundleResult = intent.getExtras();
@@ -38,7 +39,7 @@ public class ListarDetalhesParticipantesActivity extends AppCompatActivity {
         recyclerView_eventosCadastrados.setLayoutManager(new LinearLayoutManager(this));
 
         adapter_cadastrados = new ListarEventosCadastradosAdapter(
-                Singleton.getInstance().getParticipantes().get(id_participante).getEventos());
+                Singleton.getInstance().getParticipanteEventos(id_participante));
 
         recyclerView_eventosCadastrados.setAdapter(adapter_cadastrados);
 
@@ -119,9 +120,9 @@ public class ListarDetalhesParticipantesActivity extends AppCompatActivity {
     }
 
     protected void updateData(){
-        txt_nome.setText(Singleton.getInstance().getParticipantes().get(id_participante).getNome());
-        txt_email.setText(Singleton.getInstance().getParticipantes().get(id_participante).getEmail());
-        txt_cpf.setText(Singleton.getInstance().getParticipantes().get(id_participante).getCPF());
+        txt_nome.setText(ParticipanteDAO.getInstance().getParticipantes().get(id_participante).getNome());
+        txt_email.setText(ParticipanteDAO.getInstance().getParticipantes().get(id_participante).getEmail());
+        txt_cpf.setText(ParticipanteDAO.getInstance().getParticipantes().get(id_participante).getCPF());
 
     }
 }

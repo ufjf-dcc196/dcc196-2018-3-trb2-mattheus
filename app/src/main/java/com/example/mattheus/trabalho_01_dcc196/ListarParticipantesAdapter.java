@@ -15,6 +15,11 @@ public class ListarParticipantesAdapter extends RecyclerView.Adapter<ListarParti
     private OnParticipanteClickListener listener;
 
 
+    public void setParticipantes(ArrayList<Participante> p) {
+        participantes = p;
+        notifyDataSetChanged();
+    }
+
     public interface OnParticipanteClickListener {
         void onParticipanteClick(View view, int position);
         void onLongParticipanteClick(View view, int position);
