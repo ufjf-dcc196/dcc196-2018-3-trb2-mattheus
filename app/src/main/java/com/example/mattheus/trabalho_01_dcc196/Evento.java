@@ -8,7 +8,8 @@ public class Evento {
     private String titulo, data, hora, faci, desc;
     private ArrayList<Participante> participantes =  new ArrayList<>();
 
-    public Evento(String id, String titulo, String data, String hora, String facilitador, String desc) {
+    public Evento(Integer id, String titulo, String data, String hora, String facilitador, String desc) {
+        this.id = id;
         this.titulo = titulo;
         this.data = data;
         this.hora = hora;
@@ -78,7 +79,12 @@ public class Evento {
     public void addParticipante(Participante p) {
         participantes.add(p);
     }
+
     public void removeParticipante(Participante p){
         participantes.remove(p);
+    }
+
+    public void removeParticipante(int id){
+        this.participantes.remove(id);
     }
 }
