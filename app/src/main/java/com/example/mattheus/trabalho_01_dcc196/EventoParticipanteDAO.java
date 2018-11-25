@@ -40,8 +40,8 @@ public class EventoParticipanteDAO {
         }
     }
 
-    public ArrayList<Participante> getEventoParticipantes(int id) {
-        cursor = getAllParticipantesEventosBanco(id,"Participante");
+    public ArrayList<Participante> getEventoParticipantes(int id_Evento) {
+        cursor = getAllParticipantesEventosBanco(id_Evento,"Participante");
         ArrayList<Participante> participantes = new ArrayList<>();
 
         int indexNomeParticipante = cursor.getColumnIndexOrThrow(TrabalhoContract.ParticipanteTable.COLUMN_NAME_NOME);
@@ -61,9 +61,32 @@ public class EventoParticipanteDAO {
         }
         return participantes;
     }
+    public ArrayList<Evento> getParticipanteEventosNaoInscritos(int id_Participante){
+        Cursor cursor = getParticipanteEventosNaoInscritosBanco(id_Participante);
+        ArrayList<Evento> eventos = new ArrayList<>();
+        int indexTituloEvento = cursor.getColumnIndexOrThrow(TrabalhoContract.EventoTable.COLUMN_NAME_TITULO);
+        int indexDataEvento = cursor.getColumnIndexOrThrow(TrabalhoContract.EventoTable.COLUMN_NAME_DATA);
+        int indexHoraEvento = cursor.getColumnIndexOrThrow(TrabalhoContract.EventoTable.COLUMN_NAME_HORA);
+        int indexFacilitadorEvento = cursor.getColumnIndexOrThrow(TrabalhoContract.EventoTable.COLUMN_NAME_FACILITADOR);
+        int indexDescricaoEvento = cursor.getColumnIndexOrThrow(TrabalhoContract.EventoTable.COLUMN_NAME_DESCRICAO);
+        int indexIdEvento = cursor.getColumnIndexOrThrow(TrabalhoContract.EventoTable._ID);
+        if(cursor.moveToFirst()){
+            do{
+                Evento temp = new Evento();
+                temp.setTitulo(cursor.getString(indexTituloEvento));
+                temp.setData(cursor.getString(indexDataEvento));
+                temp.setHora(cursor.getString(indexHoraEvento));
+                temp.setFacilitador(cursor.getString(indexFacilitadorEvento));
+                temp.setDescricao(cursor.getString(indexDescricaoEvento));
+                temp.setID(Integer.parseInt(cursor.getString(indexIdEvento)));
+                eventos.add(temp);
+            }while (cursor.moveToNext());
+        }
+        return eventos;
+    }
 
-    public ArrayList<Evento> getParticipanteEventos(int id) {
-        cursor = getAllParticipantesEventosBanco(id,"Evento");
+    public ArrayList<Evento> getParticipanteEventos(int id_Participante) {
+        cursor = getAllParticipantesEventosBanco(id_Participante,"Evento");
         ArrayList<Evento> eventos = new ArrayList<>();
         int indexTituloEvento = cursor.getColumnIndexOrThrow(TrabalhoContract.EventoTable.COLUMN_NAME_TITULO);
         int indexDataEvento = cursor.getColumnIndexOrThrow(TrabalhoContract.EventoTable.COLUMN_NAME_DATA);
@@ -147,6 +170,20 @@ public class EventoParticipanteDAO {
         }
         Log.i("SQLTEST", "getCursorSeriado: "+c.getCount());
         return c;
+    }
+
+    private Cursor getParticipanteEventosNaoInscritosBanco(int idParticipante) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor;
+        String MY_QUERY =
+                "SELECT * FROM "+TrabalhoContract.EventoParticipanteTable.TABLE_NAME
+                        +" as  EvPart inner join "+TrabalhoContract.EventoTable.TABLE_NAME+
+                        " as Ev WHERE EvPart.ID_PARTICIPANTE !=?";
+
+        cursor= db.rawQuery(MY_QUERY, new String[]{String.valueOf(idParticipante)});
+        Log.i("SQLTEST", "getCursorSeriado: "+cursor.getCount());
+
+        return cursor;
     }
 
 

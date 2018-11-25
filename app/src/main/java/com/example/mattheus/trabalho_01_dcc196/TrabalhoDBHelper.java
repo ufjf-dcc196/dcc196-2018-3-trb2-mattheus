@@ -23,7 +23,6 @@ public class TrabalhoDBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(TrabalhoContract.EventoTable.SQL_DROP_EVENTO);
-        db.execSQL(TrabalhoContract.EventoTable.SQL_DELETE_EVENTO);
         db.execSQL(TrabalhoContract.ParticipanteTable.SQL_DROP_PARTICIPANTE);
         db.execSQL(TrabalhoContract.EventoParticipanteTable.SQL_DROP_EVENTO_PARTICIPANTE);
         onCreate(db);

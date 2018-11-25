@@ -27,6 +27,7 @@ public class ListarDetalhesParticipantesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_detalhes_participantes);
+        EventoDAO.getInstance().inicializarDBHelper(getApplicationContext());
         ParticipanteDAO.getInstance().inicializarDBHelper(getApplicationContext());
         EventoParticipanteDAO.getInstance().inicializarDBHelper(getApplicationContext());
 
@@ -39,7 +40,7 @@ public class ListarDetalhesParticipantesActivity extends AppCompatActivity {
         recyclerView_eventosCadastrados.setLayoutManager(new LinearLayoutManager(this));
 
         adapter_cadastrados = new ListarEventosCadastradosAdapter(
-                Singleton.getInstance().getParticipanteEventos(id_participante));
+                EventoParticipanteDAO.getInstance().getParticipanteEventos(id_participante));
 
         recyclerView_eventosCadastrados.setAdapter(adapter_cadastrados);
 
@@ -49,7 +50,7 @@ public class ListarDetalhesParticipantesActivity extends AppCompatActivity {
         recyclerView_eventosDisponiveis.setLayoutManager(new LinearLayoutManager(this));
 
         adapter_disponiveis = new ListarEventosDisponiveisAdapter(
-                Singleton.getInstance().getParticipantes().get(id_participante).getEventosNaoCadstrados());
+                EventoParticipanteDAO.getInstance().getParticipanteEventosNaoInscritos(id_participante));
 
         recyclerView_eventosDisponiveis.setAdapter(adapter_disponiveis);
 
@@ -63,18 +64,8 @@ public class ListarDetalhesParticipantesActivity extends AppCompatActivity {
         adapter_cadastrados.setOnEventoCadastradosClickListener(new ListarEventosCadastradosAdapter.OnEventoCadastradosClickListener() {
             @Override
             public void onEventoCadastradosClick(View view, int position) {
-
-                Integer i = Singleton.getInstance().getEventos().indexOf
-                        (Singleton.getInstance().getParticipantes().get(id_participante).getEventos().get(position));
-
-                Singleton.getInstance().getParticipantes().get(id_participante).removeEvento
-                        (Singleton.getInstance().getEventos().get(i));
-
-                Singleton.getInstance().getParticipantes().get(id_participante).addEventoNaoCadastrado
-                        (Singleton.getInstance().getEventos().get(i));
-
-                Singleton.getInstance().getEventos().get(i).removeParticipante
-                        (Singleton.getInstance().getParticipantes().get(id_participante));
+                Integer id_evento = EventoDAO.getInstance().getEventos().get(position).getID();
+                EventoParticipanteDAO.getInstance().removeParticipanteEvento(id_evento,id_participante);
 
                 adapter_disponiveis.notifyDataSetChanged();
                 adapter_cadastrados.notifyDataSetChanged();
@@ -84,17 +75,8 @@ public class ListarDetalhesParticipantesActivity extends AppCompatActivity {
         adapter_disponiveis.setOnEventoDisponiveisClickListener(new ListarEventosDisponiveisAdapter.OnEventoDisponiveisClickListener() {
             @Override
             public void onEventoDisponiveisClick(View view, int position) {
-                Integer i = Singleton.getInstance().getEventos().indexOf
-                        (Singleton.getInstance().getParticipantes().get(id_participante).getEventosNaoCadstrados().get(position));
-
-                Singleton.getInstance().getParticipantes().get(id_participante).
-                        addEvento(Singleton.getInstance().getEventos().get(i));
-
-                Singleton.getInstance().getParticipantes().get(id_participante).
-                        removeEventoNaoCadastrado(Singleton.getInstance().getEventos().get(i));
-
-                Singleton.getInstance().getEventos().get(i).
-                        addParticipante(Singleton.getInstance().getParticipantes().get(id_participante));
+                Integer id_evento = EventoDAO.getInstance().getEventos().get(position).getID();
+                EventoParticipanteDAO.getInstance().addParticpanteEvento(id_evento,id_participante);
 
                 adapter_disponiveis.notifyDataSetChanged();
                 adapter_cadastrados.notifyDataSetChanged();

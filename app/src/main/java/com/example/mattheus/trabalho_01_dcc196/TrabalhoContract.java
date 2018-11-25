@@ -47,7 +47,6 @@ public class TrabalhoContract {
                 ParticipanteTable.COLUMN_NAME_EMAIL + TEXT_TYPE + SEP +
                 ParticipanteTable.COLUMN_NAME_CPF + TEXT_TYPE + ")";
         public static final String SQL_DROP_PARTICIPANTE = "DROP TABLE IF EXISTS" + ParticipanteTable.TABLE_NAME;
-        public static final String SQL_DELETE_PARTICIPANTE = "DELETE FROM" + ParticipanteTable.TABLE_NAME+ "WHERE id=" + ParticipanteTable._ID;;
 
     }
 
@@ -66,8 +65,6 @@ public class TrabalhoContract {
                 +")";
 
         public final static String SQL_DROP_EVENTO_PARTICIPANTE = "DROP TABLE IF EXISTS "+EventoParticipanteTable.TABLE_NAME;
-        public static final String SQL_DELETE_EVENTO_PARTICIPANTE_ID = "DELETE FROM" + EventoParticipanteTable.TABLE_NAME+ "WHERE id=" + EventoParticipanteTable._ID;
-        public static final String SQL_DELETE_EVENTO_PARTICIPANTE = "DELETE FROM" + EventoParticipanteTable.TABLE_NAME+ "WHERE ID_EVENTO = " + EventoTable._ID + "AND ID_PARTICIPANTE = " + ParticipanteTable._ID;
 
     }
 
