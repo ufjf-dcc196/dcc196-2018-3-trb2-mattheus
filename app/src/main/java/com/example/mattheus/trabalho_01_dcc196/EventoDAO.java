@@ -96,7 +96,7 @@ public class EventoDAO {
     }
     public void removeEvento(Evento e) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        int rows=db.delete("TABLE_NAME","_ID=?",new String[]{String.valueOf(e.getID())});
+        db.delete(TrabalhoContract.EventoTable.TABLE_NAME,"_ID=?",new String[]{String.valueOf(e.getID())});
     }
 
     public int getIndiceEvento(Evento e){
@@ -116,11 +116,6 @@ public class EventoDAO {
         }
         return -1;
     }
-
-
-
-
-
 
     private Cursor getAllEventosBanco() {
         SQLiteDatabase db = dbHelper.getReadableDatabase();

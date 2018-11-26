@@ -149,8 +149,7 @@ public class EventoParticipanteDAO {
                     TrabalhoContract.ParticipanteTable._ID
             };
             String sort = TrabalhoContract.EventoParticipanteTable._ID+ " DESC";
-            c = db.query(TrabalhoContract.EventoParticipanteTable.TABLE_NAME, visao,
-                    "where id_participante = "+id,null,null,null, sort);
+            c = db.query(TrabalhoContract.EventoParticipanteTable.TABLE_NAME, visao,"where ID_PARTICIPANTE = "+id,null,null,null, sort);
         }else{
             String[] visao = {
                     TrabalhoContract.EventoParticipanteTable.COLUMN_NAME_ID_EVENTO,
@@ -165,7 +164,7 @@ public class EventoParticipanteDAO {
             };
             String sort = TrabalhoContract.EventoParticipanteTable._ID+ " DESC";
             c = db.query(TrabalhoContract.EventoParticipanteTable.TABLE_NAME, visao,
-                    "where id_evento = "+id,null,null,null, sort);
+                    "where ID_EVENTO = "+id,null,null,null, sort);
 
         }
         Log.i("SQLTEST", "getCursorSeriado: "+c.getCount());

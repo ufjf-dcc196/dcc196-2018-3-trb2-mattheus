@@ -72,7 +72,7 @@ public class ParticipanteDAO {
 
     public void removeParticipante(Participante indice){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        int rows=db.delete("TABLE_NAME","_ID=?",new String[]{String.valueOf(indice.getID())});
+        int rows=db.delete(TrabalhoContract.ParticipanteTable.TABLE_NAME,"_ID=?",new String[]{String.valueOf(indice.getID())});
 
     }
 

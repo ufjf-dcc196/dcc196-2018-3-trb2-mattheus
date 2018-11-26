@@ -27,7 +27,7 @@ public class ListarDetalhesEventosActivity extends AppCompatActivity {
 
         EventoDAO.getInstance().inicializarDBHelper(getApplicationContext());
         ParticipanteDAO.getInstance().inicializarDBHelper(getApplicationContext());
-
+        EventoParticipanteDAO.getInstance().inicializarDBHelper(getApplicationContext());
         final Intent intent = getIntent();
         Bundle bundleResult = intent.getExtras();
         id_evento = bundleResult.getInt(MainActivity.POSICAO_EVENTO);
