@@ -28,6 +28,7 @@ public class ListarDetalhesEventosActivity extends AppCompatActivity {
         EventoDAO.getInstance().inicializarDBHelper(getApplicationContext());
         ParticipanteDAO.getInstance().inicializarDBHelper(getApplicationContext());
         EventoParticipanteDAO.getInstance().inicializarDBHelper(getApplicationContext());
+
         final Intent intent = getIntent();
         Bundle bundleResult = intent.getExtras();
         id_evento = bundleResult.getInt(MainActivity.POSICAO_EVENTO);
@@ -35,7 +36,7 @@ public class ListarDetalhesEventosActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView_Participantes_no_Evento);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ListarParticipantesNoEventoAdapter(
-                EventoParticipanteDAO.getInstance().getEventoParticipantes(id_evento)
+                EventoParticipanteDAO.getInstance().getParticipantesNoEvento(id_evento)
         );
         recyclerView.setAdapter(adapter);
 
@@ -47,9 +48,6 @@ public class ListarDetalhesEventosActivity extends AppCompatActivity {
         btn_editar_evento = findViewById(R.id.btn_Editar_Evento);
 
         updateData();
-
-
-
 
         btn_editar_evento.setOnClickListener(new View.OnClickListener() {
             @Override

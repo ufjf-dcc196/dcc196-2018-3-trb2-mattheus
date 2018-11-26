@@ -27,8 +27,6 @@ public class ListarDetalhesParticipantesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_detalhes_participantes);
-        EventoDAO.getInstance().inicializarDBHelper(getApplicationContext());
-        ParticipanteDAO.getInstance().inicializarDBHelper(getApplicationContext());
         EventoParticipanteDAO.getInstance().inicializarDBHelper(getApplicationContext());
 
         final Intent intent = getIntent();
@@ -40,7 +38,7 @@ public class ListarDetalhesParticipantesActivity extends AppCompatActivity {
         recyclerView_eventosCadastrados.setLayoutManager(new LinearLayoutManager(this));
 
         adapter_cadastrados = new ListarEventosCadastradosAdapter(
-                EventoParticipanteDAO.getInstance().getParticipanteEventos(id_participante));
+                EventoParticipanteDAO.getInstance().getEventosDoParticipante(id_participante));
 
         recyclerView_eventosCadastrados.setAdapter(adapter_cadastrados);
 
@@ -50,7 +48,7 @@ public class ListarDetalhesParticipantesActivity extends AppCompatActivity {
         recyclerView_eventosDisponiveis.setLayoutManager(new LinearLayoutManager(this));
 
         adapter_disponiveis = new ListarEventosDisponiveisAdapter(
-                EventoParticipanteDAO.getInstance().getParticipanteEventosNaoInscritos(id_participante));
+                EventoParticipanteDAO.getInstance().getEventosNaoInscritosDoParticipante(id_participante));
 
         recyclerView_eventosDisponiveis.setAdapter(adapter_disponiveis);
 
@@ -102,9 +100,10 @@ public class ListarDetalhesParticipantesActivity extends AppCompatActivity {
     }
 
     protected void updateData(){
-        txt_nome.setText(ParticipanteDAO.getInstance().getParticipantes().get(id_participante).getNome());
-        txt_email.setText(ParticipanteDAO.getInstance().getParticipantes().get(id_participante).getEmail());
-        txt_cpf.setText(ParticipanteDAO.getInstance().getParticipantes().get(id_participante).getCPF());
+        Integer id  = ParticipanteDAO.getInstance().getParticipantes().get(id_participante).getID();
+        txt_nome.setText(ParticipanteDAO.getInstance().getParticipantes().get(id).getNome());
+        txt_email.setText(ParticipanteDAO.getInstance().getParticipantes().get(id).getEmail());
+        txt_cpf.setText(ParticipanteDAO.getInstance().getParticipantes().get(id).getCPF());
 
     }
 }
