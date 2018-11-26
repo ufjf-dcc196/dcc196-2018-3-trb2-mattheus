@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -29,7 +28,12 @@ public class EventoParticipanteDAO {
         valores.put(TrabalhoContract.EventoTable.COLUMN_NAME_DATA, "01/11/2020");
         valores.put(TrabalhoContract.EventoTable.COLUMN_NAME_FACILITADOR, "Azaghal");
         valores.put(TrabalhoContract.EventoTable.COLUMN_NAME_HORA, "00:00");
-        db.insert(TrabalhoContract.EventoTable.TABLE_NAME,null, valores);
+
+        ContentValues valores2 = new ContentValues();
+        valores2.put(TrabalhoContract.ParticipanteTable.COLUMN_NAME_NOME, "Mattheus Soares Santos");
+        valores2.put(TrabalhoContract.ParticipanteTable.COLUMN_NAME_CPF, "111.222.333-44");
+        valores2.put(TrabalhoContract.ParticipanteTable.COLUMN_NAME_EMAIL, "mattheus@soares.com.br");
+        db.insert(TrabalhoContract.ParticipanteTable.TABLE_NAME,null, valores2);
     }
 
     public void inicializarDBHelper(Context c){
@@ -62,7 +66,7 @@ public class EventoParticipanteDAO {
         return participantes;
     }
     public ArrayList<Evento> getParticipanteEventosNaoInscritos(int id_Participante){
-        Cursor cursor = getParticipanteEventosNaoInscritosBanco(id_Participante);
+        cursor = getParticipanteEventosNaoInscritosBanco(id_Participante);
         ArrayList<Evento> eventos = new ArrayList<>();
         int indexTituloEvento = cursor.getColumnIndexOrThrow(TrabalhoContract.EventoTable.COLUMN_NAME_TITULO);
         int indexDataEvento = cursor.getColumnIndexOrThrow(TrabalhoContract.EventoTable.COLUMN_NAME_DATA);
@@ -129,7 +133,7 @@ public class EventoParticipanteDAO {
 
     public void removerAllParticipantesEvento(int id){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        db.delete("EventoParticipante","ID_EVENTO=? "
+        db.delete(TrabalhoContract.EventoParticipanteTable.TABLE_NAME,"ID_EVENTO=? "
                 ,new String[]{String.valueOf(id)});
 
     }
@@ -149,7 +153,7 @@ public class EventoParticipanteDAO {
                     TrabalhoContract.ParticipanteTable._ID
             };
             String sort = TrabalhoContract.EventoParticipanteTable._ID+ " DESC";
-            c = db.query(TrabalhoContract.EventoParticipanteTable.TABLE_NAME, visao,"where ID_PARTICIPANTE = "+id,null,null,null, sort);
+            c = db.query(TrabalhoContract.EventoParticipanteTable.TABLE_NAME, visao,"ID_PARTICIPANTE = ",new String[]{String.valueOf(id)},null,null, sort);
         }else{
             String[] visao = {
                     TrabalhoContract.EventoParticipanteTable.COLUMN_NAME_ID_EVENTO,
@@ -164,10 +168,9 @@ public class EventoParticipanteDAO {
             };
             String sort = TrabalhoContract.EventoParticipanteTable._ID+ " DESC";
             c = db.query(TrabalhoContract.EventoParticipanteTable.TABLE_NAME, visao,
-                    "where ID_EVENTO = "+id,null,null,null, sort);
+                    "ID_EVENTO = "+id,null,null,null, sort);
 
         }
-        Log.i("SQLTEST", "getCursorSeriado: "+c.getCount());
         return c;
     }
 
@@ -180,7 +183,6 @@ public class EventoParticipanteDAO {
                         " as Ev WHERE EvPart.ID_PARTICIPANTE !=?";
 
         cursor= db.rawQuery(MY_QUERY, new String[]{String.valueOf(idParticipante)});
-        Log.i("SQLTEST", "getCursorSeriado: "+cursor.getCount());
 
         return cursor;
     }

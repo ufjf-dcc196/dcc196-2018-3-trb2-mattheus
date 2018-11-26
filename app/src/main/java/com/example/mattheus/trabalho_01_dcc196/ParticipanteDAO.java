@@ -4,8 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.provider.BaseColumns;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -72,7 +70,7 @@ public class ParticipanteDAO {
 
     public void removeParticipante(Participante indice){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        int rows=db.delete(TrabalhoContract.ParticipanteTable.TABLE_NAME,"_ID=?",new String[]{String.valueOf(indice.getID())});
+        db.delete(TrabalhoContract.ParticipanteTable.TABLE_NAME,"_ID=?",new String[]{String.valueOf(indice.getID())});
 
     }
 
@@ -91,7 +89,6 @@ public class ParticipanteDAO {
         String sort = TrabalhoContract.ParticipanteTable.COLUMN_NAME_NOME+ " DESC";
         Cursor c = db.query(TrabalhoContract.ParticipanteTable.TABLE_NAME, visao,
                 null,null,null,null, sort);
-        Log.i("SQLTEST", "getCursorSeriado: "+c.getCount());
         return c;
     }
 

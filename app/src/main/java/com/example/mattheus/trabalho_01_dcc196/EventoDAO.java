@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -110,7 +109,6 @@ public class EventoDAO {
         Cursor c = db.query(TrabalhoContract.EventoTable.TABLE_NAME, visao,
                 "Where TITULO= "+e.getTitulo(),null,
                 null,null, sort);
-        Log.i("SQLTEST", "getCursorSeriado: "+c.getCount());
         if(c.moveToFirst()){
             return c.getInt(1);
         }
@@ -130,7 +128,6 @@ public class EventoDAO {
         String sort = TrabalhoContract.EventoTable.COLUMN_NAME_DATA+ " DESC";
         Cursor c = db.query(TrabalhoContract.EventoTable.TABLE_NAME, visao,
                 null,null,null,null, sort);
-        Log.i("SQLTEST", "getCursorSeriado: "+c.getCount());
         return c;
     }
 
