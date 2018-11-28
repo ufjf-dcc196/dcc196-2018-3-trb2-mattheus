@@ -11,31 +11,14 @@ public class EventoDAO {
     private static EventoDAO instance = new EventoDAO();
     private TrabalhoDBHelper dbHelper;
     private Cursor cursor;
-    private boolean done = false;
     private EventoDAO() {
     }
     public static EventoDAO getInstance(){
         return instance;
     }
 
-    private void insertBanco(){
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        ContentValues valores = new ContentValues();
-        valores.put(TrabalhoContract.EventoTable.COLUMN_NAME_TITULO, "Evento 0");
-        valores.put(TrabalhoContract.EventoTable.COLUMN_NAME_DESCRICAO, "Teste do banco de dados, evento 0");
-        valores.put(TrabalhoContract.EventoTable.COLUMN_NAME_DATA, "01/11/2020");
-        valores.put(TrabalhoContract.EventoTable.COLUMN_NAME_FACILITADOR, "Azaghal");
-        valores.put(TrabalhoContract.EventoTable.COLUMN_NAME_HORA, "00:00");
-        db.insert(TrabalhoContract.EventoTable.TABLE_NAME,null, valores);
-    }
-
-
     public void inicializarDBHelper(Context c){
         dbHelper = new TrabalhoDBHelper(c);
-        if(!done){
-            insertBanco();
-            done = true;
-        }
     }
 
     public ArrayList<Evento> getEventos() {

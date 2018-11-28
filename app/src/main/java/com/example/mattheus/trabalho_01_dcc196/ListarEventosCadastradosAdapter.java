@@ -1,6 +1,7 @@
 package com.example.mattheus.trabalho_01_dcc196;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,8 +14,13 @@ import java.util.ArrayList;
 public class ListarEventosCadastradosAdapter extends RecyclerView.Adapter<ListarEventosCadastradosAdapter.ViewHolder>{
 
 
-    private ArrayList<Evento> eventos = new ArrayList<>();
+    private ArrayList<Evento> eventos;
     private OnEventoCadastradosClickListener listener;
+
+    public void removePosition(int position) {
+        eventos.remove(position);
+        this.notifyItemRemoved(position);
+    }
 
     public interface OnEventoCadastradosClickListener {
         void onEventoCadastradosClick(View view, int position);

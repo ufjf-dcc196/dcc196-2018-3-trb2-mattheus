@@ -11,7 +11,6 @@ public class ParticipanteDAO {
     private static ParticipanteDAO instance = new ParticipanteDAO();
     private TrabalhoDBHelper dbHelper;
     private Cursor cursor;
-    private boolean done = false;
 
     private ParticipanteDAO() {
     }
@@ -21,20 +20,8 @@ public class ParticipanteDAO {
     }
 
 
-    public void insertBanco(){
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        ContentValues valores = new ContentValues();
-        valores.put(TrabalhoContract.ParticipanteTable.COLUMN_NAME_NOME, "Mattheus Soares Santos");
-        valores.put(TrabalhoContract.ParticipanteTable.COLUMN_NAME_CPF, "111.222.333-44");
-        valores.put(TrabalhoContract.ParticipanteTable.COLUMN_NAME_EMAIL, "mattheus@soares.com.br");
-        db.insert(TrabalhoContract.ParticipanteTable.TABLE_NAME,null, valores);
-    }
     public void inicializarDBHelper(Context c){
         dbHelper = new TrabalhoDBHelper(c);
-        if(!done){
-            insertBanco();
-            done = true;
-        }
     }
 
     public ArrayList<Participante> getParticipantes() {

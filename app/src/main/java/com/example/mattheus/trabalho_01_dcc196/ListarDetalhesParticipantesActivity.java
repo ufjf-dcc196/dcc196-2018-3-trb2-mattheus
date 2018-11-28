@@ -68,7 +68,8 @@ public class ListarDetalhesParticipantesActivity extends AppCompatActivity {
                 EventoParticipanteDAO.getInstance().removeParticipanteEvento(id_evento,id_participante);
 
                 adapter_disponiveis.notifyDataSetChanged();
-                adapter_cadastrados.notifyItemRemoved(position);
+
+                adapter_cadastrados.removePosition(position);
 
             }
         });
@@ -81,8 +82,8 @@ public class ListarDetalhesParticipantesActivity extends AppCompatActivity {
                 Integer id_evento = EventoDAO.getInstance().getEventos().get(position).getID();
                 EventoParticipanteDAO.getInstance().addParticpanteEvento(id_evento,id_participante);
 
+                adapter_disponiveis.removePosition(position);
 
-                adapter_disponiveis.notifyItemRemoved(position);
                 adapter_cadastrados.notifyDataSetChanged();
             }
         });

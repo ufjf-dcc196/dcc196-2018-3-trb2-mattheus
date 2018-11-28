@@ -19,6 +19,11 @@ public class ListarEventosDisponiveisAdapter extends RecyclerView.Adapter<Listar
         void onEventoDisponiveisClick(View view, int position);
     }
 
+    public void removePosition(int position) {
+        eventos.remove(position);
+        this.notifyItemRemoved(position);
+    }
+
     public void setOnEventoDisponiveisClickListener(OnEventoDisponiveisClickListener listener){
         this.listener = listener;
     }
