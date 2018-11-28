@@ -38,10 +38,11 @@ public class EventoParticipanteDAO {
     public ArrayList<Evento> getEventosDoParticipante(Integer id_participante){
         SQLiteDatabase db = this.dbHelper.getReadableDatabase();
         ArrayList<Evento> eventos = new ArrayList<>();
-        Cursor c = db.rawQuery("SELECT ID_EVENTO FROM " + TrabalhoContract.EventoParticipanteTable.TABLE_NAME +
-                " WHERE ID_PARTICIPANTE  =" + id_participante, null);
+        String query = "SELECT * FROM Evento, EventoParticipante WHERE ID_PARTICIPANTE  = ? AND Evento._ID = ID_EVENTO";
+
+        Cursor c = db.rawQuery( query, new String[]{String.valueOf(id_participante)});
         while (c.moveToNext()){
-            Integer id = c.getInt(c.getColumnIndex("ID_EVENTO"));
+            Integer id = c.getInt(c.getColumnIndex(TrabalhoContract.EventoTable._ID));
             eventos.add(EventoDAO.getInstance().getEventoById(id));
         }
         return eventos;
@@ -50,13 +51,14 @@ public class EventoParticipanteDAO {
     public ArrayList<Evento> getEventosNaoInscritosDoParticipante(Integer id_participante){
         SQLiteDatabase db = this.dbHelper.getReadableDatabase();
         ArrayList<Evento> eventos = new ArrayList<>();
-        Cursor c = db.rawQuery("SELECT ID_EVENTO FROM " + TrabalhoContract.EventoParticipanteTable.TABLE_NAME +
-                " WHERE ID_PARTICIPANTE  !=" + id_participante, null);
+        String query = "SELECT ID_EVENTO FROM Evento, EventoParticipante WHERE ID_PARTICIPANTE  != ? AND Evento._ID = ID_EVENTO";
+
+        Cursor c = db.rawQuery( query, new String[]{String.valueOf(id_participante)});
         if(!c.moveToNext()){
             eventos = EventoDAO.getInstance().getEventos();
         }
         while (c.moveToNext()){
-            Integer id = c.getInt(c.getColumnIndex("ID_EVENTO"));
+            Integer id = c.getInt(c.getColumnIndex(TrabalhoContract.EventoTable._ID));
             eventos.add(EventoDAO.getInstance().getEventoById(id));
         }
         return eventos;
