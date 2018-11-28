@@ -29,8 +29,8 @@ public class EventoParticipanteDAO {
         Cursor c = db.rawQuery("SELECT ID_PARTICIPANTE FROM " + TrabalhoContract.EventoParticipanteTable.TABLE_NAME +
                 " WHERE ID_EVENTO =" + id_evento, null);
         while (c.moveToNext()){
-            Integer id = cursor.getInt(cursor.getColumnIndex("ID_PARTICIPANTE"));
-            participantes.add(ParticipanteDAO.getInstance().getParticipantes().get(id));
+            Integer id = c.getInt(c.getColumnIndex("ID_PARTICIPANTE"));
+            participantes.add(ParticipanteDAO.getInstance().getParticipanteById(id));
         }
         return participantes;
     }
@@ -41,8 +41,8 @@ public class EventoParticipanteDAO {
         Cursor c = db.rawQuery("SELECT ID_EVENTO FROM " + TrabalhoContract.EventoParticipanteTable.TABLE_NAME +
                 " WHERE ID_PARTICIPANTE  =" + id_participante, null);
         while (c.moveToNext()){
-            Integer id = cursor.getInt(cursor.getColumnIndex("ID_EVENTO"));
-            eventos.add(EventoDAO.getInstance().getEventos().get(id));
+            Integer id = c.getInt(c.getColumnIndex("ID_EVENTO"));
+            eventos.add(EventoDAO.getInstance().getEventoById(id));
         }
         return eventos;
     }
@@ -52,9 +52,12 @@ public class EventoParticipanteDAO {
         ArrayList<Evento> eventos = new ArrayList<>();
         Cursor c = db.rawQuery("SELECT ID_EVENTO FROM " + TrabalhoContract.EventoParticipanteTable.TABLE_NAME +
                 " WHERE ID_PARTICIPANTE  !=" + id_participante, null);
+        if(!c.moveToNext()){
+            eventos = EventoDAO.getInstance().getEventos();
+        }
         while (c.moveToNext()){
-            Integer id = cursor.getInt(cursor.getColumnIndex("ID_EVENTO"));
-            eventos.add(EventoDAO.getInstance().getEventos().get(id));
+            Integer id = c.getInt(c.getColumnIndex("ID_EVENTO"));
+            eventos.add(EventoDAO.getInstance().getEventoById(id));
         }
         return eventos;
     }
@@ -67,7 +70,7 @@ public class EventoParticipanteDAO {
 
     public void removerAllParticipantesEvento(int id_evento){
         SQLiteDatabase db = this.dbHelper.getWritableDatabase();
-        db.delete(TrabalhoContract.EventoParticipanteTable.TABLE_NAME,"ID_EVENTO=? "
+        db.delete(TrabalhoContract.EventoParticipanteTable.TABLE_NAME,"ID_EVENTO = ? "
                 ,new String[]{String.valueOf(id_evento)});
 
     }

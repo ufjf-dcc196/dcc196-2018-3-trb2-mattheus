@@ -57,6 +57,23 @@ public class ParticipanteDAO {
         }
         return participantes;
     }
+    public Participante getParticipanteById(Integer idParticipante) {
+        Participante participante  = null;
+        cursor = getAllParticipantesBanco();
+        int indexNomeParticipante = cursor.getColumnIndexOrThrow(TrabalhoContract.ParticipanteTable.COLUMN_NAME_NOME);
+        int indexCpfParticipante = cursor.getColumnIndexOrThrow(TrabalhoContract.ParticipanteTable.COLUMN_NAME_CPF);
+        int indexEmailParticipante = cursor.
+                getColumnIndexOrThrow(TrabalhoContract.ParticipanteTable.COLUMN_NAME_EMAIL);
+        int indexIdParticipante = cursor.getColumnIndexOrThrow(TrabalhoContract.ParticipanteTable._ID);
+        if(cursor.moveToFirst()){
+            participante = new Participante();
+            participante.setNome(cursor.getString(indexNomeParticipante));
+            participante.setCPF(cursor.getString(indexCpfParticipante));
+            participante.setEmail(cursor.getString(indexEmailParticipante));
+            participante.setID(Integer.parseInt(cursor.getString(indexIdParticipante)));
+        }
+        return participante;
+    }
 
     public void addParticipante(Participante p){
         SQLiteDatabase db = dbHelper.getWritableDatabase();

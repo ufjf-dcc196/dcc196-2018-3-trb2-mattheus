@@ -62,10 +62,6 @@ public class ListarDetalhesEventosActivity extends AppCompatActivity {
             @Override
             public void onParticipanteNoEventoClick(View view, int position) {
 
-                Intent intent2 = new Intent(ListarDetalhesEventosActivity.this,ListarDetalhesParticipantesActivity.class);
-                intent2.putExtra(ListarDetalhesEventosActivity.POSICAO_PARTICIPANTE,position);
-                startActivity(intent2);
-
             }
             @Override
             public void onLongParticipanteNoEventoClick(View view, int position) {

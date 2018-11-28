@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         EventoDAO.getInstance().inicializarDBHelper(getApplicationContext());
+        EventoParticipanteDAO.getInstance().inicializarDBHelper(getApplicationContext());
 
         btn_cadastrar_evento = findViewById(R.id.btn_Cadastrar_Evento);
         btn_cadastrar_participante = findViewById(R.id.btn_Cadastrar_Participante);
@@ -57,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onLongEventoClick(View view, int position) {
                 Integer id_evento = EventoDAO.getInstance().getEventos().get(position).getID();
-                EventoDAO.getInstance().removeEvento(EventoDAO.getInstance().getEventos().get(position));
 
+                EventoDAO.getInstance().removeEvento(EventoDAO.getInstance().getEventos().get(position));
                 EventoParticipanteDAO.getInstance().removerAllParticipantesEvento(id_evento);
 
                 adapter.setEventos(EventoDAO.getInstance().getEventos());
